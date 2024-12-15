@@ -65,6 +65,7 @@
         const tear = document.getElementById('tear');
         const humidityText = document.getElementById('humidityText');
         let humidityValues = [];
+        let chartInstance = null;  
         const API_URL = 'http://135.236.209.197/api/v1/get-data';
 
         async function fetchData() {
@@ -85,48 +86,54 @@
             const values = data.map(row => row._value);
 
             const latestHumidity = values[values.length - 1];
-            humidityValues = [...values]; // Update humidityValues array
+            humidityValues = [...values]; 
 
             humidityText.innerText = `Humidity: ${Math.round(latestHumidity)}%`;
 
             if (latestHumidity >= 60) {
-                tear.setAttribute('fill', 'green'); // Good humidity
+                tear.setAttribute('fill', 'green'); 
             } else if (latestHumidity >= 30) {
-                tear.setAttribute('fill', 'yellow'); // Moderate humidity
+                tear.setAttribute('fill', 'yellow');
             } else {
-                tear.setAttribute('fill', 'red'); // Low humidity
+                tear.setAttribute('fill', 'red'); 
             }
 
-            const ctx = document.getElementById('humidityChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: times,
-                    datasets: [{
-                        label: 'Humidity (%)',
-                        data: values,
-                        borderColor: 'blue',
-                        backgroundColor: 'rgba(0, 0, 255, 0.1)',
-                        tension: 0.2,
-                        fill: true,
-                    }],
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        x: {
-                            title: { display: true, text: 'Time' },
-                        },
-                        y: {
-                            title: { display: true, text: 'Humidity (%)' },
+            if (chartInstance) {
+                chartInstance.data.labels = times;  
+                chartInstance.data.datasets[0].data = values; 
+                chartInstance.update();  
+            } else {
+                const ctx = document.getElementById('humidityChart').getContext('2d');
+                chartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: times,
+                        datasets: [{
+                            label: 'Humidity (%)',
+                            data: values,
+                            borderColor: 'blue',
+                            backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                            tension: 0.2,
+                            fill: true,
+                        }],
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: {
+                                title: { display: true, text: 'Time' },
+                            },
+                            y: {
+                                title: { display: true, text: 'Humidity (%)' },
+                            },
                         },
                     },
-                },
-            });
+                });
+            }
         }
 
         fetchData();
-        setInterval(fetchData, 3000);
+        setInterval(fetchData, 3000);  
     </script>
 </body>
 </html>

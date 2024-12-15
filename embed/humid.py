@@ -3,8 +3,8 @@ import machine
 import network
 import urequests as requests
 
-SSID = "Lime wifi"
-PASSWORD = "behube22"
+SSID = "wifi"
+PASSWORD = "password"
 API_ENDPOINT = "http://135.236.209.197/api/v1/embed"
 
 INTERVAL = 3
