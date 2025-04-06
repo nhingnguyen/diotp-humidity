@@ -3,11 +3,11 @@ import machine
 import network
 import urequests as requests
 
-SSID = "wifi"
-PASSWORD = "password"
+SSID = "Lime wifi"
+PASSWORD = "behube22"
 API_ENDPOINT = "http://135.236.209.197/api/v1/embed"
 
-INTERVAL = 3
+INTERVAL = 5
 DHT_PIN = machine.Pin(0)
 
 try:
