@@ -63,4 +63,4 @@ Open-source technologies ensure flexibility and community support.
 VPS provides 24/7 reliability
 
 ### Demo 
-[![Demo Video](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=4S8vpAUcOuk&ab_channel=IrisNguyen)
+[![Demo Video]()](https://www.youtube.com/watch?v=4S8vpAUcOuk&ab_channel=IrisNguyen)
